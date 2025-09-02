@@ -8,14 +8,12 @@ CitiVoice is a Django-based web application designed to help citizens submit fee
 - **Complaint Submission:** Users can submit complaints with title, description, and location.
 - **Voting System:** Users can vote on complaints to highlight important issues.
 - **Complaint Assignment:** Admins can take complaints and update their status (pending, active, completed).
-- **Filtering & Pagination:** Complaints can be filtered by status and location; lists are paginated for usability.
 - **AJAX Interactions:** Most actions (add, vote, update status) use AJAX for a smooth user experience.
 - **Role-Based Access:** Admins have special permissions to manage complaints and locations.
-- **Responsive UI:** Built with Bootstrap for mobile-friendly design.
 
 ## Technologies Used
 
-- **Backend:** Django, Django ORM
+- **Backend:** Django
 - **Frontend:** HTML, CSS (Bootstrap), JavaScript (jQuery, AJAX)
 - **Database:** SQLite (default, can be changed)
 - **Other:** Font Awesome, Bootstrap Icons, jQuery UI (via CDN)
