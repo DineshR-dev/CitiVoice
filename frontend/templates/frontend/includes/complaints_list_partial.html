@@ -1,0 +1,70 @@
+<!--
+    complaints_list_partial.html
+
+    Partial template for displaying a paginated list of complaints.
+    - Shows complaint title, location, description, votes, and status
+    - Provides "Read More", "Vote", and "Take" actions based on user role and authentication
+    - Includes pagination at the bottom
+-->
+
+<!-- Complaints List -->
+
+<div class="list-group mb-3">
+    {% for complaint in complaints %}
+        <!-- Complaint Item -->
+        <div class="list-group-item">
+            <!-- Left section: Complaint details -->
+            <div class="complaint-left">
+                <strong>
+                    {{ forloop.counter|add:complaints.start_index|add:"-1" }}.
+                    {{ complaint.title|truncatewords:10 }} ({{ complaint.location.name }})
+                </strong>
+                <p class="complaint-desc mb-1">{{ complaint.description|truncatewords:20 }}</p>
+                <p style="font-size: 0.85rem;">Posted on: {{ complaint.created_at|date:"M d, Y" }}</p>
+                <button class="btn btn-sm btn-link p-0">
+                    {% if user.is_authenticated %}
+                        <a href="{{ complaint.get_absolute_url }}" class="text-decoration-none">Read More</a>
+                    {% else %}
+                        <a href="{% url 'frontend:login' %}" class="text-decoration-none">Read More</a>
+                    {% endif %}
+                </button>
+            </div>
+
+            <!-- Middle section: Vote count -->
+            <div class="complaint-mid">
+                <span class="badge bg-dark">{{ complaint.votes.count }} Votes</span>
+            </div>
+            
+            <!-- Right section: Actions and status -->
+            <div class="complaint-right">
+                {% if complaint.status != 'not_taken' %}
+                    <span class="badge bg-success">Taken</span>
+                {% elif not user.is_authenticated %}
+                    <button class="btn btn-sm btn-outline-success" onclick="location.href='{% url 'frontend:login' %}'">Vote</button>
+                {% elif has_vote %}
+                    <button class="btn btn-sm btn-outline-success" onclick="voteComplaint({{ complaint.id }})">Vote</button>
+                {% else %}
+                    <button class="btn btn-sm btn-outline-secondary" disabled title="You have no points">Vote</button>
+                {% endif %}
+
+                {% if user.is_authenticated and perms.core.admin_perm %}
+                    {% if complaint.status == 'not_taken' %}
+                        {% if user_location == complaint.location or user_location == 'general' %}
+                            <button class="btn btn-sm btn-outline-primary" onclick="takeComplaint({{ complaint.id }})">Take</button>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <!-- No complaints found message -->
+        <div class="list-group-item">
+            <div class="flex-grow-1 text-center">
+                No complaints found.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination controls -->
+{% include "frontend/includes/pagination.html" with page_obj=complaints pagination_function="getComplaints" %}

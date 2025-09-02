@@ -1,0 +1,54 @@
+{% extends 'frontend/includes/base.html' %}
+{% block title %}Profile - CitiVoice{% endblock %}
+{% block dynamic_content  %}
+
+# page explaining how the portal works
+<div class="container my-5">
+    <h1 class="mb-4">How This Portal Works</h1>
+    <p>
+        This portal is built to give every citizen a voice.  
+        People often face local problems such as poor infrastructure, safety issues, or community needs but they do not always reach the right authorities.  
+        With this application, both <strong>complaints</strong> and <strong>new ideas</strong> are welcomed.  
+        The purpose is to create a transparent system where everyone can highlight problems, share solutions, and make sure important issues are noticed by the people responsible for taking action.
+    </p>
+
+    <h2 class="mt-4">Citizen Role</h2>
+    <ul>
+        <li>Each citizen receives <strong>1 point per month</strong>.</li>
+        <li>That point can be used to <strong>raise a complaint/idea</strong> or <strong>vote for an existing one</strong>.</li>
+        <li>On the homepage, all current month’s complaints are listed, sorted by vote count (highest first).</li>
+        <li>By voting, citizens help highlight the most urgent or useful complaints/ideas so admins can prioritize them.</li>
+    </ul>
+
+    <h2 class="mt-4">Admin Role</h2>
+    <ul>
+        <li>Admins also receive <strong>1 point per month</strong> to add a complaint/idea or vote for an existing one.</li>
+        <li>In addition, each admin can <strong>take up to 2 complaints into action per month</strong>.</li>
+        <li>Once a complaint is taken, the admin can update its status:
+            <ul>
+                <li><em>Not Taken</em> – default state</li>
+                <li><em>Pending</em> – review in progress</li>
+                <li><em>Active</em> – action is being taken</li>
+                <li><em>Completed</em> – resolved successfully</li>
+            </ul>
+        </li>
+        <li>Admins can only take complaints assigned to their location (or general complaints).</li>
+    </ul>
+
+    <h2 class="mt-4">Workflow</h2>
+    <ol>
+        <li>A citizen or admin creates a complaint/idea.</li>
+        <li>Other users vote for the most relevant complaints.</li>
+        <li>Complaints with the highest votes appear at the top of the homepage.</li>
+        <li>Admins select complaints to take into action and update their statuses.</li>
+        <li>Citizens can track progress through the complaint detail page.</li>
+    </ol>
+
+    <h2 class="mt-4">Why This Matters</h2>
+    <p>
+        This platform ensures that <strong>everyone’s voice is heard</strong> and that issues with the greatest community support are addressed first.  
+        It encourages participation, transparency, and accountability.  
+        By working together citizens raising problems, admins taking responsibility, and votes highlighting priorities we create a better, more responsive community.
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'frontend/includes/base.html' %}
+{% block title %}Profile Update - CitiVoice{% endblock %}
+{% block dynamic_content  %}
+
+<div class="container py-2">
+    <h4 class="text-center mb-3">Profile Update</h4>
+    <div class="container px-5">  
+        <div class="card p-4 mx-auto" style="max-width: 500px;">
+            <form>
+                <div class="mb-3">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div id='profileUpdateAlert' class="alert alert-danger" role="alert">{{ message }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div id='profileUpdateAlert' class="alert" role="alert"></div>
+                {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" required value="{{ user.email }}" disabled>
+                </div>  
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required value="{{ user.username }}">
+                </div>
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="full_name" required value="{{ user.fullname | default:"" }}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone_number" required value="{{ user.phone | default:"" }}">
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <select class="form-select" id="location" required>
+                        <option value="">Select Area</option>
+                        {% for loc in location %}
+                            <option value="{{ loc.id }}" {% if user.location == loc %}selected{% endif %}>{{ loc.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" id="updateProfileBtn" data-url="{% url 'frontend:profile_update' %}" onclick="updateProfile()">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

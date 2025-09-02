@@ -1,0 +1,58 @@
+{% extends 'frontend/includes/base.html' %}
+{% block title %}Home - CitiVoice{% endblock %}
+{% block dynamic_content  %}
+
+{# Main complaints page with filter, points, and add complaint button #}
+<div class="container py-2">
+  <h4 class="text-center mb-3">Complaints</h4>
+  <div class="container px-5">
+    <div class="card p-4 mx-auto">
+
+      <!-- Top Filter & Status -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Filter Dropdown -->
+        <div>
+          <label for="filter" class="me-2 fw-semibold">Filter:</label>
+          <select id="filter" class="form-select d-inline-block w-auto" onchange="getComplaints(1)">
+            <option value="">All</option>
+            {% for location in locations %}
+              <option value="{{ location.id }}">{{ location.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Points & Add Complaint -->
+        <div>
+          {% if not user.is_authenticated %}
+            <span class="small-tag bg-light text-dark me-2">You have 1 point</span>
+            <button class="btn btn-sm btn-success">
+              <a href="{% url 'frontend:login' %}" class="text-white text-decoration-none">Add Complaint</a>
+            </button>
+          {% elif has_vote %}
+            <span class="small-tag bg-light text-dark me-2">You have 1 point</span>
+            <button class="btn btn-sm btn-success">
+              <a href="{% url 'frontend:add_complaint' %}" class="text-white text-decoration-none">Add Complaint</a>
+            </button>
+          {% else %}
+            <span class="small-tag bg-light text-dark me-2">You have 0 points</span>
+            <button class="btn btn-sm btn-secondary" disabled>
+              <a href="#" class="text-white text-decoration-none">Add Complaint</a>
+            </button>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Complaints List -->
+      <div id="complaints-list">
+        {% include 'frontend/includes/complaints_list_partial.html' %}
+      </div>
+      <input type="hidden" id="voteComplaintURL" value="{% url 'frontend:vote_complaint' %}">
+      <input type="hidden" id="is_user_login" value="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+      {% if perms.core.admin_perm %}
+        <input type="hidden" id="takeComplaintURL" value="{% url 'frontend:take_complaint' %}">
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

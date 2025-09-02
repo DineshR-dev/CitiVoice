@@ -1,0 +1,37 @@
+{% extends 'frontend/includes/base.html' %}
+{% block title %}Sign Up - CitiVoice{% endblock %}
+{% block dynamic_content  %}
+
+<div class="container py-2">
+    <h4 class="text-center mb-3">Sign Up</h4>
+    <div class="container px-5">  
+        <div class="card p-4 mx-auto" style="max-width: 500px;">
+            <form>
+                <div class="mb-3">
+                    <div id='signupAlert' class="alert" role="alert"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                </div>
+                <div class="text-center">
+                    <button type="button" id='signupButton' data-signup-url="{% url 'frontend:signup' %}" class="btn btn-primary" onclick="signup()">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

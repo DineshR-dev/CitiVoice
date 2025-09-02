@@ -1,0 +1,62 @@
+<!--
+    complaints_taken_partial.html
+
+    Partial template for displaying a paginated list of complaints assigned to admins.
+    - Shows complaint title, location, description, votes, and status
+    - Provides "Read More" and "Update" actions for admins
+    - Includes pagination at the bottom
+-->
+
+<div class="list-group mb-3">
+    {% for task in tasks %}
+        <!-- Complaint Item -->
+        <div class="list-group-item">
+
+            <!-- Left section: Complaint details -->
+            <div class="complaint-left">
+                <strong>
+                    {{ forloop.counter|add:tasks.start_index|add:"-1" }}.
+                    {{ task.complaint.title|truncatewords:10 }} ({{ task.complaint.location.name }})
+                </strong>
+                <p class="complaint-desc mb-1">{{ task.complaint.description|truncatewords:20 }}</p>
+                <p style="font-size: 0.85rem;">Posted on: {{ task.complaint.created_at|date:"M d, Y" }}</p>
+                <button class="btn btn-sm btn-link p-0">
+                    <a href="{{ task.complaint.get_absolute_url }}" class="text-decoration-none">Read More</a>
+                </button>
+            </div>
+
+            <!-- Middle section: Vote count -->
+            <div class="complaint-mid">
+                <span class="badge bg-dark">{{ task.complaint.votes.count }} Votes</span>
+            </div>
+
+            <!-- Right section: Status and update button -->
+            <div class="complaint-right">
+                <div class="complaint-status">
+                    {# Status badge based on complaint status #}
+                    {% if task.complaint.status == "pending" %}
+                        <span id='statusBadge{{task.id}}' class="badge bg-warning">{{ task.complaint.status|title }}</span>
+                    {% elif task.complaint.status == "active" %}
+                        <span id='statusBadge{{task.id}}' class="badge bg-info">{{ task.complaint.status|title }}</span>
+                    {% elif task.complaint.status == "completed" %}
+                        <span id='statusBadge{{task.id}}' class="badge bg-success">{{ task.complaint.status|title }}</span>
+                    {% endif %}
+
+                    {% if user.is_authenticated and perms.core.admin_perm %}
+                        <button id='statusUpdateBtn{{task.id}}' class="btn btn-sm btn-primary" onclick="showStatusUpdate({{task.id}})">Update</button>
+                    {% endif %}
+                </div>
+            </div>
+            
+        </div>
+    {% empty %}
+        <!-- No complaints found message -->
+        <div class="list-group-item">
+            <div class="flex-grow-1 text-center">
+                No complaints found.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<!-- Pagination controls -->
+{% include "frontend/includes/pagination.html" with page_obj=tasks pagination_function="getTakenComplaints" %}

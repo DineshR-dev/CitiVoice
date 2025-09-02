@@ -1,0 +1,63 @@
+{% extends 'frontend/includes/base.html' %}
+{% block title %}Profile - CitiVoice{% endblock %}
+{% block dynamic_content  %}
+
+
+<div class="container py-2">
+    <h4 class="text-center mb-3">Profile</h4>
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card p-4">
+            <!-- Profile Picture -->
+            <div class="text-center">
+                <div class="profile-pic">{{ profile_picture_text|upper }}</div>
+                {% if user.fullname %}
+                <h4 class="mb-0">{{ user.fullname }}</h4>
+                {% endif %}
+                <small class="text-muted">@{{ user.username }}</small>
+            </div>
+
+            <hr>
+
+            <!-- User Info -->
+            <div class="mb-3"><strong>Email:</strong> {{ user.email | default:"-"}}</div>
+            <div class="mb-3"><strong>Full Name:</strong> {{ user.fullname | default:"-"}}</div>
+            <div class="mb-3"><strong>Location:</strong> {{ user.location | default:"-"}}</div>
+            <div class="mb-3"><strong>Phone:</strong> {{ user.phone | default:"-"}}</div>
+
+            <!-- Stats -->
+            <div class="row text-center my-4">
+                <div class="col-4">
+                <div class="stats-box">
+                    <h5>{{ total_vote_count }}</h5>
+                    <small>Total Votes</small>
+                </div>
+                </div>
+                <div class="col-4">
+                <div class="stats-box">
+                    <h5>{{ total_complaint_count }}</h5>
+                    <small>Total Complaints</small>
+                </div>
+                </div>
+                <div class="col-4">
+                <div class="stats-box">
+                    <h5>{{ taken_ratio|default:0 }}%</h5>
+                    <small>Handled Ratio</small>
+                </div>
+                </div>
+            </div>
+
+            <!-- Edit Button -->
+            <div class="text-center">
+                <button class="btn btn-outline-primary" >
+                    <a href="{% url 'frontend:profile_update' %}">Edit Profile</a>
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
