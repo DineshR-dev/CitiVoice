@@ -1,6 +1,6 @@
 # CitiVoice - Citizen Feedback & Complaint Management System
 
-CitiVoice is a Django-based web application designed to help citizens submit feedback and complaints to local authorities, track their status, and promote transparency in public issue resolution. This project was built to explore practical Django modeling, form handling, AJAX, and real-world web development concepts.
+CitiVoice is a Django-based web application designed to help citizens submit feedback and complaints to local authorities, track their status, and promote transparency in public issue resolution. This project was built to explore practical Django modeling, form handling, AJAX, and real-world web development concepts. The application follows a super simple, minimalist design without complex or overwhelming elements, making it easy for users to understand and use effectively.
 
 ## Features
 
