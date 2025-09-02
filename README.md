@@ -30,7 +30,7 @@ CitiVoice is a Django-based web application designed to help citizens submit fee
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/citizen_feedback.git
+   git clone https://github.com/DineshR-dev/CitiVoice.git
    cd citizen_feedback
    ```
 
