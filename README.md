@@ -63,7 +63,7 @@ CitiVoice is a Django-based web application designed to help citizens submit fee
 ![Home Page](https://github.com/user-attachments/assets/4e9ce2a8-fb02-4187-9d5c-1f18f05652b0)
 *Example of the CitiVoice's Home page contains all complaints of current month* 
 
-![Profile Page](https://github.com/user-attachments/assets/8057b903-d61f-4f13-8c64-e6226aab88cc)
+![Profile Page](https://github.com/user-attachments/assets/d67a4dfd-156e-452d-b23a-a84db45026e9)
 *Example of the CitiVoice's profile page*
 
 ![Complaint Page](https://github.com/user-attachments/assets/69c6704d-f83f-4353-a2f5-4d247e7ce6ff)
