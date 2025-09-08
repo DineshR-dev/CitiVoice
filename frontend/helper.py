@@ -16,9 +16,9 @@ def has_vote(user):
         user=user
     ).count()
 
-    # If the user has more than 10 interactions (complaints + votes), they can't vote
+    # If the user has interactions (complaints + votes), they can't vote
     total_interactions = votes + complaints
-    if total_interactions > 10:
+    if total_interactions > 0:
         return False
     return True
 
