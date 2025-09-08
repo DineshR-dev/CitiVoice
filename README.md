@@ -46,10 +46,10 @@ CitiVoice is a Django-based web application designed to help citizens submit fee
    python manage.py createsuperuser
    ```
 5. **Admin Setup (via Django Admin Panel):**
-   Log in at http://localhost:8000/admin/
-   Add locations in the Location table
-   Register some user accounts from the app
-   Promote those registered users to Admin role from the Users section
+   - Log in at http://localhost:8000/admin/
+   - Add locations in the Location table
+   - Register some user accounts from the app
+   - Promote those registered users to Admin role from the Users section
 
 4. **Run the development server:**
    ```bash
